@@ -1,7 +1,4 @@
 #Matias Gonzalo Calvo Efip 2020
-#from flask_restful import Resource, Api, request
-#import json
-#import mysql.connector as mariadb
 import logging
 from consulta_db_efip import *
 
