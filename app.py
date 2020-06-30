@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 flask_app = Flask(__name__)
-app = Api(app = flask_app, version = "1.0", title = "Farma Salud Efip", description = "Apis desarrollada para manejar Farma Salud")
+app = Api(app = flask_app, version = "1.0", title = "Farma Salud Efip", description = "Apis desarrollada para manejar Farma Salud",_scheme='https', _external=True)
 
 
 
