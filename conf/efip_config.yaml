@@ -11,5 +11,5 @@ sql:
   sql_get_sucursales: "SELECT id, nombre, direccion, descripcion FROM sucursales"
   sql_get_all_art: "SELECT articulo.idproduct, articulo.barcode, articulo.nombre, articulo.precio, articulo.descripcion, articulo.marca, DATE_FORMAT(inventario.fecha_alta, '%d/%m/%Y') AS fecha_alta , DATE_FORMAT(inventario.fecha_venc , '%d/%m/%Y') AS fecha_venc , inventario.sucursales_id, inventario.cantidad FROM efip.articulo LEFT JOIN efip.inventario ON inventario.barcode  = articulo.barcode WHERE articulo.nombre LIKE '%ibu%'"
 keycloack:
-  login_url: "https://login.mgcalvo.com/auth/realms/FarmaSalud/protocol/openid-connect/auth?client_id=farmasalud&scope=openid+email+profile&access_type=offline&response_type=code&openid.realm=farmasalud&redirect_uri=https://farmasaludapi.mgcalvo.com/success"
-  logout_url: 'https://login.mgcalvo.com/auth/realms/FarmaSalud/protocol/openid-connect/logout?redirect_uri=https://'
+  login_url: "https://login.mgcalvo.com/auth/realms/farmasalud/protocol/openid-connect/auth?client_id=farmasalud&scope=openid+email+profile&access_type=offline&response_type=code&openid.realm=farmasalud&redirect_uri=https://farmasaludapi.mgcalvo.com/success"
+  logout_url: 'https://login.mgcalvo.com/auth/realms/farmasalud/protocol/openid-connect/logout?redirect_uri=https://'
