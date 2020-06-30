@@ -91,7 +91,8 @@ class MainClass(Resource):
         else:
             #No logeado
             print("else")
-            login_url = "http://localhost:8080/auth/realms/FarmaSalud/protocol/openid-connect/auth?client_id=flask-app&scope=openid+email+profile&access_type=offline&response_type=code&openid.realm=flask-demo&redirect_uri=http://localhost:9080/success"
+            #login_url = "http://localhost:8080/auth/realms/FarmaSalud/protocol/openid-connect/auth?client_id=flask-app&scope=openid+email+profile&access_type=offline&response_type=code&openid.realm=flask-demo&redirect_uri=http://localhost:9080/success"
+            login_url = config['keycloack']['login_url']
             articulos.abort(401, status = "Could not save information" , statusCode = "401", url_login = login_url)
         #return '{"url" : "http:"}'
         #oidc.redirect_to_auth_server
@@ -99,7 +100,7 @@ class MainClass(Resource):
 @flask_app.route('/success/<path:url_callback>')
 @oidc.require_login
 def login_web(url_callback):
-    return '<script>window.location.assign("http://' + url_callback +'")</script>'
+    return '<script>window.location.assign("https://' + url_callback +'")</script>'
 
 @flask_app.route('/logout/<path:url_callback>')
 @oidc.require_login
@@ -108,7 +109,8 @@ def logout_web  (url_callback):
         logging.warning("antes de logout")
         oidc.logout()
         logging.warning("despues de logout")
-        logout_url = 'http://localhost:8080/auth/realms/FarmaSalud/protocol/openid-connect/logout?redirect_uri=http://' + url_callback 
+        logout_url = config['keycloack']['logout_url'] + url_callback
+        #logout_url = 'http://localhost:8080/auth/realms/FarmaSalud/protocol/openid-connect/logout?redirect_uri=http://' + url_callback 
     except KeyError as e:
         sucursales.abort(500, e.__doc__, status = "Hubo un error en el server" + str(e), statusCode = "500")
     except Exception as e:
