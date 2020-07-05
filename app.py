@@ -54,7 +54,7 @@ logout = app.namespace('logout', description='login')
 
 
 #CORS(flask_app)
-CORS(flask_app, supports_credentials=True)
+CORS(flask_app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 with open(r'conf/efip_config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
 
