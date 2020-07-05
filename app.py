@@ -22,6 +22,10 @@ flask_app = Flask(__name__)
 #CORS(flask_app)
 CORS(flask_app, supports_credentials=True, resources={r"*": {"origins": "*"}})
 
+flask_app.config['OVERWRITE_REDIRECT_URI'] = 'https://farmasaludapi.mgcalvo.com/oidc_callback'
+#flask_app.config['OVERWRITE_REDIRECT_URI'] = 'https://farmasalud.mgcalvo.com/'
+
+
 @property
 def specs_url(self):
     return url_for(self.endpoint('specs'), _external=True, _scheme='https')
