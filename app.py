@@ -1,7 +1,7 @@
 #Matias Gonzalo Calvo | matiasgonzalocalvo@gmail.com | Efip Julio 2020
 
 from flask import Flask, request, jsonify, json, Response, stream_with_context , g
-from flask_restplus import Api, Resource, fields
+from flask_restplus import Api, Resource, fields, cors
 import yaml
 import logging
 import requests
@@ -19,6 +19,9 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 flask_app = Flask(__name__)
+#CORS(flask_app)
+CORS(flask_app, supports_credentials=True, resources={r"*": {"origins": "*"}})
+
 @property
 def specs_url(self):
     return url_for(self.endpoint('specs'), _external=True, _scheme='https')
@@ -53,8 +56,7 @@ login = app.namespace('login', description='login')
 logout = app.namespace('logout', description='login')
 
 
-#CORS(flask_app)
-CORS(flask_app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
+
 with open(r'conf/efip_config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
 
@@ -249,6 +251,7 @@ class MainClass(Resource):
 
 @user.route("/")
 class MainClass(Resource):
+    #@cors.crossdomain(origin='*')
     @oidc.require_login
     def get(self):
         try:
@@ -265,7 +268,7 @@ class MainClass(Resource):
             email = info.get('email')
             user_id = info.get('sub')
             #logging.warning(oidc.user_getfield())
-            #logging.warning(info.get('prueba'))
+            #logging.warning(info.get('prueba'))         
             x = '{"username" : "' + username + '", "email" : "' + email + '", "sub" : "' + user_id + '"}'
             return json.loads(x)
         except KeyError as e:
