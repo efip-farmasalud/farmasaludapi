@@ -70,7 +70,7 @@ agregararticulo_model = app.model('Modelo agregar articulo',
                                     'nombre_del_articulo': fields.String(required = True, description="nombre del articulo", help="no puede estar en blanco",max_length=50), 
                                     'marca_del_articulo': fields.String(required = True, description="marca del articulo", help="no puede estar en blanco",max_length=50),
                                     'precio': fields.Integer(required = True, description="Precio del articulo", help="no puede estar en blanco"),
-                                    'barcode': fields.Float(required = True, description="Barcode del articulo", help="no puede estar en blanco",max_length=16,min_length=16),
+                                    'barcode': fields.String(required = True, description="Barcode del articulo", help="no puede estar en blanco",max_length=16,min_length=16),
                                     'descripcion': fields.String(required = True, description="Descripcion del articulo", help="no puede estar en blanco",max_length=100),
                                 })
 
@@ -221,7 +221,9 @@ class MainClass(Resource):
     def post(self):
         try:
             content = request.get_json()
-            art_abm = articulos_abm() 
+            art_abm = articulos_abm()
+            logging.warning("logeo barcode debug")
+            logging.warning(content["barcode"])
             art_abm.add_articulos(content["barcode"],content["nombre_del_articulo"],content["precio"],content["descripcion"],content["marca_del_articulo"])
             #return json.loads(articulos.response(200, app.__doc__, status = "status ok", statusCode = "200") )
         except KeyError as e:

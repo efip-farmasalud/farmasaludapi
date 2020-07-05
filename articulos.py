@@ -31,6 +31,8 @@ class articulos_abm():
     def add_articulos(self,barcode,nombre,precio,descripcion,marca):
         """ Agregar un nuevo articulo """
         logging.warning("add_articulos")
+        logging.warning(barcode)
+        logging.warning(str(barcode))
         sql = "INSERT INTO articulo (barcode, nombre, precio, descripcion, marca ) VALUES('" + str(barcode) + "','" + nombre + "','" + str(precio) + "','" + descripcion + "','" + marca + "');"
         try:
             articulos_get = mariadb_efip()
