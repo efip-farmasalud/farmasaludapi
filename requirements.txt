@@ -1,6 +1,6 @@
 mysql-connector==2.2.9
 Flask==1.1.1
-mysql-connector-python==8.0.5
+mysql-connector-python==8.0.14
 werkzeug==0.16.1 
 Flask-Cors==3.0.8        
 Flask-Login==0.5.0        
